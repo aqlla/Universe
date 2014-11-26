@@ -27,8 +27,8 @@ int main(int argc, const char * argv[]) {
     
     // Load Shader Programs
     ShaderProgram* program;
-    Shader* vertexShader   = new Shader("shader_programs/ShaderProgram.vs", GL_VERTEX_SHADER);
-    Shader* fragmentShader = new Shader("shader_programs/ShaderProgram.fs", GL_FRAGMENT_SHADER);
+    Shader* vertexShader   = new Shader("/ShaderProgram.vs", GL_VERTEX_SHADER);
+    Shader* fragmentShader = new Shader("/ShaderProgram.fs", GL_FRAGMENT_SHADER);
     
     program = new ShaderProgram(std::vector<Shader*> {vertexShader, fragmentShader});
     program->bindFragDataLocation(0, "fragData");

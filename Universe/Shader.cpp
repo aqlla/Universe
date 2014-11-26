@@ -15,6 +15,7 @@ Shader::Shader(std::string path, GLenum type) {
     
     if (!fin.is_open()) {
         fin.close();
+        std::cout << "file not found: " << path << std::endl;
         throw GLException("file not found: " + path);
     }
     
@@ -43,6 +44,7 @@ Shader::Shader(std::string path, GLenum type) {
         std::cout << infoLog << std::endl;
         delete infoLog;
         
+        std::cout << "file not found: " << path << std::endl;
         throw GLException("Shader failed to compile: " + path);
     }
 }

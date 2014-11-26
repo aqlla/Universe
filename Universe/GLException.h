@@ -17,7 +17,7 @@ private:
     std::string _what;
 public:
     GLException(std::string what);
-    virtual ~GLException();
+    virtual ~GLException() throw();
     virtual const char* what();
 };
 
