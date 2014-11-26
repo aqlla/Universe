@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9E04ED831A1BC23F006E6E2B /* libglfw.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E04ED821A1BC23F006E6E2B /* libglfw.3.0.dylib */; };
-		9E04ED971A1BD514006E6E2B /* ShaderProgram.vs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E04ED861A1BC833006E6E2B /* ShaderProgram.vs */; };
 		9E04ED981A1BD519006E6E2B /* ShaderProgram.fs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9E04ED871A1BC850006E6E2B /* ShaderProgram.fs */; };
 		9E04ED9E1A1C4D44006E6E2B /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04ED9C1A1C4D44006E6E2B /* Window.cpp */; };
 		9E04EDA11A1C5613006E6E2B /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04ED9F1A1C5613006E6E2B /* Shader.cpp */; };
@@ -29,7 +28,6 @@
 			dstSubfolderSpec = 7;
 			files = (
 				9E04ED981A1BD519006E6E2B /* ShaderProgram.fs in CopyFiles */,
-				9E04ED971A1BD514006E6E2B /* ShaderProgram.vs in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,7 +35,6 @@
 
 /* Begin PBXFileReference section */
 		9E04ED821A1BC23F006E6E2B /* libglfw.3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.0.dylib; path = ../../../../../../../../usr/local/lib/libglfw.3.0.dylib; sourceTree = "<group>"; };
-		9E04ED861A1BC833006E6E2B /* ShaderProgram.vs */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = ShaderProgram.vs; path = "../../../../../../../Mobile Documents/com~apple~CloudDocs/Programming/C++/Universe/ShaderProgram.vs"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E04ED871A1BC850006E6E2B /* ShaderProgram.fs */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; path = ShaderProgram.fs; sourceTree = "<group>"; };
 		9E04ED9C1A1C4D44006E6E2B /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		9E04ED9D1A1C4D44006E6E2B /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
@@ -49,6 +46,7 @@
 		9E04EDA61A1C6650006E6E2B /* GLException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLException.h; sourceTree = "<group>"; };
 		9E04EEAB1A1C7FE5006E6E2B /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Body.cpp; sourceTree = "<group>"; };
 		9E04EEAC1A1C7FE5006E6E2B /* Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Body.h; sourceTree = "<group>"; };
+		9E73E01B1A25599100FFAA76 /* ShaderProgram.vs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShaderProgram.vs; sourceTree = "<group>"; };
 		9EC22B3C1A1AD16A0087F164 /* Universe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Universe; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC22B3F1A1AD16A0087F164 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9EC22B461A1AD1C10087F164 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -83,7 +81,7 @@
 		9E04ED851A1BC7E4006E6E2B /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				9E04ED861A1BC833006E6E2B /* ShaderProgram.vs */,
+				9E73E01B1A25599100FFAA76 /* ShaderProgram.vs */,
 				9E04ED871A1BC850006E6E2B /* ShaderProgram.fs */,
 			);
 			name = Shaders;
