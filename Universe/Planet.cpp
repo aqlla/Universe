@@ -8,16 +8,31 @@
 
 #include "Planet.h"
 
-const float Planet::MIN_DENSITY = 3;
-const float Planet::MAX_DENSITY = 10;
+const float Planet::MIN_DENSITY = 500;
+const float Planet::MAX_DENSITY = 1000;
 const float Planet::MIN_RADIUS = 1;
 const float Planet::MAX_RADIUS = 8;
-const float Planet::MIN_V = 50;
-const float Planet::MAX_V = 200;
+const float Planet::MIN_V = 30;
+const float Planet::MAX_V = 85;
 
-Planet::Planet(int x, int y)
-:Body(randi(MIN_RADIUS, MAX_RADIUS), x, y, randi(Planet::MIN_DENSITY, Planet::MAX_DENSITY)) {
-    if (x == 0) x = 1;
-    if (y == 0) y = 1;
-    setVelocity(randi(-MAX_V, MAX_V), randi(-MAX_V, MAX_V));
+Planet::Planet(int x, int y): Body(randi(MIN_RADIUS, MAX_RADIUS), x, y, randi(Planet::MIN_DENSITY, Planet::MAX_DENSITY))
+{
+    pair_t v {
+        std::abs(position.y),
+        std::abs(position.x)
+    };
+    
+    double r = Physics::hypoteneuse(v);
+    
+    if (position.x > 0 && position.y > 0) {
+        v.x = -v.x;
+    } else if (position.x < 0 && position.y > 0) {
+        v.x = -v.x;
+        v.y = -v.y;
+    } else if (position.x < 0 && position.y < 0) {
+        v.y = -v.y;
+    }
+    
+    
+    setVelocity((v.x * randi(MIN_V, MAX_V)) / r, (v.y * randi(MIN_V, MAX_V)) / r);
 }

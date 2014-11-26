@@ -17,9 +17,6 @@
 class God {
 private:
     const static int numBodies;
-    const static int maxV;
-    const static int maxPx;
-    const static int maxPy;
     const static int maxR;
     const static int minR;
     

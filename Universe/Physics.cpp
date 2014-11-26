@@ -31,3 +31,4 @@ double Physics::sphereRadiusFromVolume(double volume) {
 double Physics::hypoteneuse(pair_t legs) {
     return std::sqrt(legs.x * legs.x + legs.y * legs.y);
 }
+

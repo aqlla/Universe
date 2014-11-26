@@ -6,12 +6,9 @@
 
 #include "God.h"
 
-const int God::numBodies = 2000;
-const int God::maxV = 50;
-const int God::maxPx = 2000;
-const int God::maxPy = 1000;
-const int God::maxR = 10;
-const int God::minR = 2;
+const int God::numBodies = 3500;
+const int God::maxR = 2000;
+const int God::minR = 200;
 
 God::God(int windowWidth, int windowHeight)
 : windowWidth(windowWidth), windowHeight(windowHeight) {
@@ -19,12 +16,16 @@ God::God(int windowWidth, int windowHeight)
     bodies.push_back(std::ref(*sun));
     
     for (int i = 0; i < numBodies; ++i) {
-        int x = randi(-maxPx, maxPx);
-        int y = randi(-maxPy, maxPy);
+        int x = randi(-maxR, maxR);
+        int y = randi(-maxR, maxR);
+
+        while (std::sqrt(x*x + y*y) < minR || std::sqrt(x*x + y*y) > maxR) {
+            x = randi(-maxR, maxR);
+            y = randi(-maxR, maxR);
+        }
         
         Body* planet = new Planet(x, y);
         bodies.push_back(std::ref(*planet));
-
     }
 }
 

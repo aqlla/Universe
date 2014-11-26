@@ -11,7 +11,7 @@
 #include "pair.h"
 
 #define PI 3.14159265358979323846
-#define G 6.67e-3
+#define G 6.67e-5
 
 class Physics {
 public:
