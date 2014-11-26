@@ -23,7 +23,6 @@ private:
     
     float aspect;
     float dradius;
-    
 
     pair_t cradius;     // Component radius to compensate for streching
     pair_t dPosition;   // Display position
@@ -33,6 +32,7 @@ private:
     
     static pair_t centerOfMass(Body& b1, Body& b2);
     static pair_t postCollisionVelocity(Body& b1, Body& b2);
+    
 public:
     Body(double radius, float x, float y);
     Body(Body& b1, Body& b2);
@@ -68,7 +68,6 @@ public:
     void getVertices(float* bufferData);
     void getIndices(unsigned short* indexData);
 
-    
     std::string toString() const;
 };
 
