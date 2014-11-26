@@ -9,10 +9,18 @@
 unsigned int Body::instanceCount = 0;
 const int Body::viewWidth = 2500;
 const int Body::viewHeight = 1400;
+float Body::viewScale = 1.0;
+float Body::bodyScale = 1.0;
 
 Body::Body(double radius, float x, float y)
 :radius(radius), velocity({0,0}), position({x,y}) {
-    mass = std::pow(radius, 5.0);
+    mass = Physics::volumeFromRadius(radius) * 5.0;
+    setBody();
+}
+
+Body::Body(double radius, float x, float y, float density)
+:radius(radius), velocity({0,0}), position({x,y}) {
+    mass = Physics::volumeFromRadius(radius) * density;
     setBody();
 }
 
@@ -32,10 +40,11 @@ Body::~Body() {
 void Body::setBody() {
     dPosition = {position.x / viewWidth, position.y / viewHeight};
     
-    if (radius > 45)      segments = 60;
+    if (radius > 60)      segments = 90;
+    else if (radius > 45) segments = 60;
     else if (radius > 35) segments = 36;
     else if (radius > 25) segments = 24;
-    else                   segments = 12;
+    else                  segments = 12;
     
     segmentStep = 360.0 / segments;
     
@@ -57,27 +66,27 @@ void Body::setVelocity(double x, double y) {
 }
 
 void Body::updatePosition(double dt) {
-    double xMove = velocity.x * dt;
-    double yMove = velocity.y * dt;
-    
-    if (position.x + radius + xMove > viewWidth || position.x - radius + xMove < -viewWidth) {
-        velocity.x = -velocity.x;
-        position.x += velocity.x * dt;
-    } else {
-        position.x += xMove;
-    }
-    
-    if (position.y + radius + yMove > viewHeight || position.y - radius + yMove < -viewHeight) {
-        velocity.y = -velocity.y;
-        position.y += velocity.y * dt;
-    } else {
-        position.y += yMove;
-    }
+    position.x += velocity.x * dt;
+    position.y += velocity.y * dt;
     
     dPosition = {
         position.x / viewWidth,
         position.y / viewHeight
     };
+}
+
+void Body::processGravity(std::list<std::reference_wrapper<Body>>& others) {
+    pair_t netForce {0, 0};
+    
+    for (std::list<std::reference_wrapper<Body>>::iterator b = others.begin(); b != others.end(); ++b) {
+        if (this != &(*b).get()) {
+            pair_t force = this->getForce(*b);
+            netForce.x += force.x;
+            netForce.y += force.y;
+        }
+    }
+    
+    this->accelerate(netForce);
 }
 
 void Body::accelerate(pair_t force) {
@@ -111,13 +120,13 @@ pair_t Body::getMomentum() {
 void Body::getVertices(float* bufferData) {
     float deg = 0;
     
-    bufferData[0] = dPosition.x;
-    bufferData[1] = dPosition.y;
+    bufferData[0] = (Body::viewScale * dPosition.x);
+    bufferData[1] = (Body::viewScale * dPosition.y);
     
     for (int i=2; i < (segments+1)*2 + 1; i+=2) {
         float rad = Physics::deg2rad * deg;
-        bufferData[i]   = std::cosf(rad) * cradius.x + dPosition.x;
-        bufferData[i+1] = std::sinf(rad) * cradius.y + dPosition.y;
+        bufferData[i]   = std::cosf(rad) * Body::bodyScale * cradius.x + (Body::viewScale * dPosition.x);
+        bufferData[i+1] = std::sinf(rad) * Body::bodyScale * cradius.y + (Body::viewScale * dPosition.y);
         deg += segmentStep;
     }
 }
@@ -168,12 +177,29 @@ pair_t Body::postCollisionVelocity(Body& b1, Body& b2) {
     return pair_t {x, y};
 }
 
+void Body::setViewScale(float change) {
+    change *= .5;
+    if (!(viewScale + change <= SCALE_MIN || viewScale + change >= SCALE_MAX))
+        Body::viewScale += change;
+}
+
+
+void Body::setBodyScale(float change) {
+    change *= .1;
+    if (!(bodyScale + change <= SCALE_MIN || bodyScale + change >= SCALE_MAX))
+        Body::bodyScale += change;
+}
+
 std::string Body::toString() const {
     std::stringstream stm;
     stm << "Pos:\t[" << position.x << ", " << position.y << "]" << std::endl;
     stm << "Radius:\t" << radius << std::endl;
     stm << "Mass:\t" << mass << std::endl;
     return stm.str();
+}
+
+int Body::randi(int min, int max) {
+    return min + random() % (max - min + 1);
 }
 
 

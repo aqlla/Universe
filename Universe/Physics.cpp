@@ -20,6 +20,10 @@ double Physics::toa(double opposite, double adjacent) {
     return opposite / adjacent;
 }
 
+double Physics::volumeFromRadius(double radius) {
+    return (4.0/3.0) * PI * std::pow(radius, 3);
+}
+
 double Physics::sphereRadiusFromVolume(double volume) {
     return std::pow(volume / ((4.0/3.0) * PI), 1.0/3.0);
 }

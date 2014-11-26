@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <list>
+#include "Planet.h"
+#include "Star.h"
 #include "Body.h"
 #include "pair.h"
 

@@ -30,20 +30,26 @@ private:
     static void error_callback(int error, const char* description);
     static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
     
+    float scale;
 public:
     Window(GLint width, GLint height, std::string title);
     virtual ~Window();
     
-    void makeContextCurrent();
-    bool shouldClose();
-    GLint getFrameBufferWidth();
-    GLint getFrameBufferHeight();
-    void swapBuffers();
-    GLdouble getDeltaTime();
-    GLFWwindow* getWindow();
+    void setScale(float change);
     
+    void makeContextCurrent();
+    void swapBuffers();
+    
+    void setScrollCallback(GLFWscrollfun);
+    
+    bool shouldClose();
+    float getScale();
+    GLFWwindow* getWindow();
+    GLdouble getDeltaTime();
     GLint getInitialWidth();
     GLint getInitialHeight();
+    GLint getFrameBufferWidth();
+    GLint getFrameBufferHeight();
 };
 
 #endif /* defined(__Universe__Window__) */

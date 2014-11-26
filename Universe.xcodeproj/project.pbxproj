@@ -13,6 +13,8 @@
 		9E73E0181A25578D00FFAA76 /* libglfw.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E73E0171A25578D00FFAA76 /* libglfw.3.0.dylib */; };
 		9EC22B401A1AD16A0087F164 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EC22B3F1A1AD16A0087F164 /* main.cpp */; };
 		9EC22B471A1AD1C10087F164 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC22B461A1AD1C10087F164 /* OpenGL.framework */; };
+		9EC22B4C1A25912B0087F164 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EC22B4A1A25912B0087F164 /* Planet.cpp */; };
+		9EC22B4F1A2591EB0087F164 /* Star.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EC22B4D1A2591EB0087F164 /* Star.cpp */; };
 		9EF1105C1A1DD9230030ED3C /* Physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EF1105A1A1DD9230030ED3C /* Physics.cpp */; };
 		9EF1105F1A2064800030ED3C /* God.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EF1105D1A2064800030ED3C /* God.cpp */; };
 /* End PBXBuildFile section */
@@ -43,6 +45,10 @@
 		9EC22B3C1A1AD16A0087F164 /* Universe */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Universe; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC22B3F1A1AD16A0087F164 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9EC22B461A1AD1C10087F164 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		9EC22B4A1A25912B0087F164 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
+		9EC22B4B1A25912B0087F164 /* Planet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Planet.h; sourceTree = "<group>"; };
+		9EC22B4D1A2591EB0087F164 /* Star.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Star.cpp; sourceTree = "<group>"; };
+		9EC22B4E1A2591EB0087F164 /* Star.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Star.h; sourceTree = "<group>"; };
 		9EF1105A1A1DD9230030ED3C /* Physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Physics.cpp; sourceTree = "<group>"; };
 		9EF1105B1A1DD9230030ED3C /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		9EF1105D1A2064800030ED3C /* God.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = God.cpp; sourceTree = "<group>"; };
@@ -107,6 +113,10 @@
 				9EF1105E1A2064800030ED3C /* God.h */,
 				9E04EEAB1A1C7FE5006E6E2B /* Body.cpp */,
 				9E04EEAC1A1C7FE5006E6E2B /* Body.h */,
+				9EC22B4D1A2591EB0087F164 /* Star.cpp */,
+				9EC22B4E1A2591EB0087F164 /* Star.h */,
+				9EC22B4A1A25912B0087F164 /* Planet.cpp */,
+				9EC22B4B1A25912B0087F164 /* Planet.h */,
 				9EF1105A1A1DD9230030ED3C /* Physics.cpp */,
 				9EF1105B1A1DD9230030ED3C /* Physics.h */,
 				9E04ED9C1A1C4D44006E6E2B /* Window.cpp */,
@@ -178,7 +188,9 @@
 				9EC22B401A1AD16A0087F164 /* main.cpp in Sources */,
 				9E04EEAD1A1C7FE5006E6E2B /* Body.cpp in Sources */,
 				9E04ED9E1A1C4D44006E6E2B /* Window.cpp in Sources */,
+				9EC22B4F1A2591EB0087F164 /* Star.cpp in Sources */,
 				9EF1105F1A2064800030ED3C /* God.cpp in Sources */,
+				9EC22B4C1A25912B0087F164 /* Planet.cpp in Sources */,
 				9E04EDA11A1C5613006E6E2B /* Shader.cpp in Sources */,
 				9EF1105C1A1DD9230030ED3C /* Physics.cpp in Sources */,
 			);

@@ -15,6 +15,9 @@
 #include <cmath>
 #include <list>
 
+#define SCALE_MAX 2.0
+#define SCALE_MIN 0.1
+
 class Body {
 private:
     static unsigned instanceCount;
@@ -25,7 +28,6 @@ private:
     float dradius;
 
     pair_t cradius;     // Component radius to compensate for streching
-    pair_t dPosition;   // Display position
     int vertexCount;
     
     void setBody();
@@ -33,7 +35,11 @@ private:
     static pair_t centerOfMass(Body& b1, Body& b2);
     static pair_t postCollisionVelocity(Body& b1, Body& b2);
     
+    static float viewScale;
+    static float bodyScale;
+    
 public:
+    Body(double radius, float x, float y, float density);
     Body(double radius, float x, float y);
     Body(Body& b1, Body& b2);
     virtual ~Body();
@@ -41,16 +47,21 @@ public:
     static const int viewWidth;
     static const int viewHeight;
     
+    pair_t dPosition;   // Display position
     double radius;
     double mass;
     
     pair_t velocity;
     pair_t position;
     
+    static void setViewScale(float change);
+    static void setBodyScale(float change);
+    
     void accelerate(pair_t force);
+    bool collidesWith(Body& other);
     void setVelocity(double x, double y);
     void updatePosition(double deltaTime);
-    bool collidesWith(Body& other);
+    void processGravity(std::list<std::reference_wrapper<Body>>& others);
     
     
     // Get body metrics
@@ -61,7 +72,6 @@ public:
     pair_t getDistanceFrom(Body& other);
     double getDistanceFromSurface(Body& other);
     
-    
     /* Getter functions providing information for OpenGL to display
     the bodies */
     short getNumSegments();
@@ -69,6 +79,8 @@ public:
     void getIndices(unsigned short* indexData);
 
     std::string toString() const;
+    
+    int randi(int min, int max);
 };
 
 #endif /* defined(__Universe__Body__) */

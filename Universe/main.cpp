@@ -9,6 +9,7 @@
 #include <iostream>
 #include <OpenGL/gl3.h>
 #include <GLFW/glfw3.h>
+#include "GLException.h"
 #include "Window.h"
 #include "Shader.h"
 #include "Body.h"
@@ -17,26 +18,47 @@
 const int WIN_WIDTH  = 2200;
 const int WIN_HEIGHT = 1440;
 
-void draw(Body*, GLint, GLint, GLint);
+void draw(Window*, ShaderProgram*);
+void scrollFunc(GLFWwindow*, double x, double y);
+
+God* god;
+Window* window;
 
 int main(int argc, const char * argv[]) {
     // Initialize window
-    Window* window = new Window(WIN_WIDTH, WIN_HEIGHT, "OpenGL");
+    window = new Window(WIN_WIDTH, WIN_HEIGHT, "OpenGL");
     window->makeContextCurrent();
     
-    // Load Shader Programs
-    ShaderProgram* program;
-    Shader* vertexShader   = new Shader("ShaderProgram.vs", GL_VERTEX_SHADER);
-    Shader* fragmentShader = new Shader("ShaderProgram.fs", GL_FRAGMENT_SHADER);
+    try {
+        // Load Shader Programs
+        ShaderProgram* program;
+        Shader* vertexShader   = new Shader("ShaderProgram.vs", GL_VERTEX_SHADER);
+        Shader* fragmentShader = new Shader("ShaderProgram.fs", GL_FRAGMENT_SHADER);
+        
+        program = new ShaderProgram(std::vector<Shader*> {vertexShader, fragmentShader});
+        program->bindFragDataLocation(0, "fragData");
+        program->link();
+        program->use();
+        
+        delete vertexShader;
+        delete fragmentShader;
+        
+        window->setScrollCallback(scrollFunc);
+        
+        draw(window, program);
+        
+        delete program;
+    } catch (GLException e) {
+        e.std::exception::what();
+    }
     
-    program = new ShaderProgram(std::vector<Shader*> {vertexShader, fragmentShader});
-    program->bindFragDataLocation(0, "fragData");
-    program->link();
-    program->use();
+    delete window;
     
-    delete vertexShader;
-    delete fragmentShader;
-    
+    return 0;
+}
+
+
+void draw(Window* window, ShaderProgram* program) {
     GLuint vbo;
     glGenBuffers(1, &vbo);
     GLuint ebo;
@@ -50,9 +72,8 @@ int main(int argc, const char * argv[]) {
     
     GLint viewWidth  = window->getFrameBufferWidth();
     GLint viewHeight = window->getFrameBufferHeight();
-
     
-    God* god = new God(viewWidth, viewHeight);
+    god = new God(viewWidth, viewHeight);
     std::list<std::reference_wrapper<Body>> bodies = god->bodies;
     
     while (!window->shouldClose()) {
@@ -62,12 +83,10 @@ int main(int argc, const char * argv[]) {
         glClear(GL_COLOR_BUFFER_BIT);
         
         for (std::list<std::reference_wrapper<Body>>::iterator it = bodies.begin(); it != bodies.end(); ++it) {
-                
             short segCount = (*it).get().getNumSegments();
             
             float bufferData[(segCount + 1) * 2 + 2];
             (*it).get().getVertices(bufferData);
-            
             
             // Add verts to buffer then unbind VBO
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -96,36 +115,28 @@ int main(int argc, const char * argv[]) {
             glDrawElements(GL_TRIANGLE_FAN, segCount*3, GL_UNSIGNED_SHORT, nullptr);
             glBindVertexArray(NULL);
             
-            double dT = window->getDeltaTime();
-//            (*it)->updateAccelerationFromGravity(bodies, dT);
-            (*it).get().updatePosition(dT);
+            (*it).get().updatePosition(window->getDeltaTime());
         }
         
         god->processGravity();
         god->checkCollisions();
         bodies = god->bodies;
         
-        
         glfwPollEvents();
         window->swapBuffers();
-
-        std::cout << "FPS: " << 1 / window->getDeltaTime() << std::endl;
+        //        std::cout << "FPS: " << 1 / window->getDeltaTime() << std::endl;
     }
     
     // delete the stuff
     glDeleteBuffers(1, &ebo);
     glDeleteBuffers(1, &vbo);
     glDeleteVertexArrays(1, &vao);
-    
-    delete window;
-    delete program;
-    
-    return 0;
 }
 
-
-
-
+void scrollFunc(GLFWwindow* window, double x, double y) {
+    Body::setViewScale(y);
+    Body::setBodyScale(x);
+}
 
 
 

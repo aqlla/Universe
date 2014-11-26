@@ -7,7 +7,7 @@
 #include "God.h"
 
 const int God::numBodies = 2000;
-const int God::maxV = 150;
+const int God::maxV = 50;
 const int God::maxPx = 2000;
 const int God::maxPy = 1000;
 const int God::maxR = 10;
@@ -15,19 +15,16 @@ const int God::minR = 2;
 
 God::God(int windowWidth, int windowHeight)
 : windowWidth(windowWidth), windowHeight(windowHeight) {
+    Body* sun = new Star();
+    bodies.push_back(std::ref(*sun));
+    
     for (int i = 0; i < numBodies; ++i) {
         int x = randi(-maxPx, maxPx);
         int y = randi(-maxPy, maxPy);
         
-        Body* body = new Body(randi(minR, maxR), x, y);
-        
-        int xv(maxV);
-        if (y > 0)
-            xv = -maxV;
-            
-        
-        body->setVelocity(xv, randi(-maxV, maxV));
-        bodies.push_back(std::ref(*body));
+        Body* planet = new Planet(x, y);
+        bodies.push_back(std::ref(*planet));
+
     }
 }
 
@@ -37,6 +34,7 @@ God::~God() {
 
 void God::processGravity() {
     for (std::list<std::reference_wrapper<Body>>::iterator b1 = bodies.begin(); b1 != bodies.end(); ++b1) {
+//        (*b1).get().processGravity(ref(bodies));
         pair_t netForce {0,0};
         
         for (std::list<std::reference_wrapper<Body>>::iterator b2 = bodies.begin(); b2 != bodies.end(); ++b2) {
@@ -62,7 +60,7 @@ void God::checkCollisions() {
                 
                 b2 = bodies.erase(b2);
                 b1 = bodies.erase(b1);
-                std::cout << bodies.size() << std::endl;
+                break;
             }
             
             b2++;

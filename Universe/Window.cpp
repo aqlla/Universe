@@ -42,6 +42,8 @@ Window::Window(const GLint width, const GLint height, const std::string title) {
         
         this->initialWidth  = this->getFrameBufferWidth();
         this->initialHeight = this->getFrameBufferHeight();
+        
+        scale = 1.0;
     }
 }
 
@@ -49,30 +51,17 @@ Window::~Window() {
     glfwDestroyWindow(this->_window);
     this->instanceCount--;
     
-    if (Window::instanceCount == 0) {
+    if (Window::instanceCount == 0)
         glfwTerminate();
-        std::cout << "GLFW Terminated." << std::endl;
-    }
 }
+
 
 void Window::makeContextCurrent() {
     glfwMakeContextCurrent(this->_window);
 }
 
-bool Window::shouldClose() {
-    return glfwWindowShouldClose(this->_window);
-}
-
-GLint Window::getFrameBufferWidth() {
-    GLint width;
-    glfwGetFramebufferSize(this->_window, &width, nullptr);
-    return width;
-}
-
-GLint Window::getFrameBufferHeight() {
-    GLint height;
-    glfwGetFramebufferSize(this->_window, nullptr, &height);
-    return height;
+void Window::setScrollCallback(GLFWscrollfun func) {
+    glfwSetScrollCallback(this->_window, func);
 }
 
 void Window::swapBuffers() {
@@ -80,6 +69,20 @@ void Window::swapBuffers() {
     GLdouble currentTime = glfwGetTime();
     this->deltaDime = currentTime - this->lastBufferSwapTime;
     this->lastBufferSwapTime = currentTime;
+}
+
+void Window::setScale(float change) {
+    this->scale += change;
+}
+
+
+
+bool Window::shouldClose() {
+    return glfwWindowShouldClose(this->_window);
+}
+
+float Window::getScale() {
+    return this->scale;
 }
 
 GLdouble Window::getDeltaTime() {
@@ -96,6 +99,18 @@ GLint Window::getInitialWidth() {
 
 GLint Window::getInitialHeight() {
     return this->initialHeight;
+}
+
+GLint Window::getFrameBufferWidth() {
+    GLint width;
+    glfwGetFramebufferSize(this->_window, &width, nullptr);
+    return width;
+}
+
+GLint Window::getFrameBufferHeight() {
+    GLint height;
+    glfwGetFramebufferSize(this->_window, nullptr, &height);
+    return height;
 }
 
 void Window::error_callback(int error, const char* description) {
