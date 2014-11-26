@@ -1,10 +1,8 @@
-//
 //  God.cpp
 //  Universe
 //
 //  Created by Aquilla Sherrock on 11/22/14.
 //  Copyright (c) 2014 Aquilla Sherrock. All rights reserved.
-//
 
 #include "God.h"
 

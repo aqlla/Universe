@@ -26,7 +26,7 @@ int main(int argc, const char * argv[]) {
     
     // Load Shader Programs
     ShaderProgram* program;
-    Shader* vertexShader   = new Shader("asd/ShaderProgram.vs", GL_VERTEX_SHADER);
+    Shader* vertexShader   = new Shader("ShaderProgram.vs", GL_VERTEX_SHADER);
     Shader* fragmentShader = new Shader("ShaderProgram.fs", GL_FRAGMENT_SHADER);
     
     program = new ShaderProgram(std::vector<Shader*> {vertexShader, fragmentShader});

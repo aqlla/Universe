@@ -1,10 +1,8 @@
-//
 //  Physics.cpp
 //  Universe
 //
 //  Created by Aquilla Sherrock on 11/20/14.
 //  Copyright (c) 2014 Aquilla Sherrock. All rights reserved.
-//
 
 #include "Physics.h"
 

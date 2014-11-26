@@ -1,10 +1,8 @@
-//
 //  Window.cpp
 //  Universe
 //
 //  Created by Aquilla Sherrock on 11/18/14.
 //  Copyright (c) 2014 Aquilla Sherrock. All rights reserved.
-//
 
 #include "Window.h"
 

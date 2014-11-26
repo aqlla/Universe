@@ -1,10 +1,8 @@
-//
 //  GLException.h
 //  Universe
 //
 //  Created by Aquilla Sherrock on 11/18/14.
 //  Copyright (c) 2014 Aquilla Sherrock. All rights reserved.
-//
 
 #ifndef __Universe__GLException__
 #define __Universe__GLException__
@@ -28,7 +26,5 @@ public:
         return _what.c_str();
     };
 };
-
-
 
 #endif /* defined(__Universe__GLException__) */
