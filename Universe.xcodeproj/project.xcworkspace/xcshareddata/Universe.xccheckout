@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0A6F91DA-9A9B-4327-8161-5DD65B56AA3B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Universe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>57141EC7741CA6AF09429BFC8B1DF19C057D576F</key>
+		<string>https://github.com/aquilleph/Universe.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Universe.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>57141EC7741CA6AF09429BFC8B1DF19C057D576F</key>
+		<string>../../../../../../../Library/Mobile%20Documents/com~apple~CloudDocs/Programming/C++/Universe</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/aquilleph/Universe.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>57141EC7741CA6AF09429BFC8B1DF19C057D576F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>57141EC7741CA6AF09429BFC8B1DF19C057D576F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Universe</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>57141EC7741CA6AF09429BFC8B1DF19C057D576F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Universe</string>
+		</dict>
+	</array>
+</dict>
+</plist>
