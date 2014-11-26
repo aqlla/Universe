@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		9E04ED9E1A1C4D44006E6E2B /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04ED9C1A1C4D44006E6E2B /* Window.cpp */; };
 		9E04EDA11A1C5613006E6E2B /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04ED9F1A1C5613006E6E2B /* Shader.cpp */; };
-		9E04EDA41A1C5835006E6E2B /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04EDA21A1C5835006E6E2B /* ShaderProgram.cpp */; };
-		9E04EDA71A1C6650006E6E2B /* GLException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04EDA51A1C6650006E6E2B /* GLException.cpp */; };
 		9E04EEAD1A1C7FE5006E6E2B /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E04EEAB1A1C7FE5006E6E2B /* Body.cpp */; };
 		9E73E0181A25578D00FFAA76 /* libglfw.3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E73E0171A25578D00FFAA76 /* libglfw.3.0.dylib */; };
 		9EC22B401A1AD16A0087F164 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EC22B3F1A1AD16A0087F164 /* main.cpp */; };
@@ -36,9 +34,6 @@
 		9E04ED9D1A1C4D44006E6E2B /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
 		9E04ED9F1A1C5613006E6E2B /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		9E04EDA01A1C5613006E6E2B /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
-		9E04EDA21A1C5835006E6E2B /* ShaderProgram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderProgram.cpp; sourceTree = "<group>"; };
-		9E04EDA31A1C5835006E6E2B /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
-		9E04EDA51A1C6650006E6E2B /* GLException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLException.cpp; sourceTree = "<group>"; };
 		9E04EDA61A1C6650006E6E2B /* GLException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLException.h; sourceTree = "<group>"; };
 		9E04EEAB1A1C7FE5006E6E2B /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Body.cpp; sourceTree = "<group>"; };
 		9E04EEAC1A1C7FE5006E6E2B /* Body.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Body.h; sourceTree = "<group>"; };
@@ -118,9 +113,6 @@
 				9E04ED9D1A1C4D44006E6E2B /* Window.h */,
 				9E04ED9F1A1C5613006E6E2B /* Shader.cpp */,
 				9E04EDA01A1C5613006E6E2B /* Shader.h */,
-				9E04EDA21A1C5835006E6E2B /* ShaderProgram.cpp */,
-				9E04EDA31A1C5835006E6E2B /* ShaderProgram.h */,
-				9E04EDA51A1C6650006E6E2B /* GLException.cpp */,
 				9E04EDA61A1C6650006E6E2B /* GLException.h */,
 				9EF110601A207BBC0030ED3C /* pair.h */,
 			);
@@ -184,8 +176,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EC22B401A1AD16A0087F164 /* main.cpp in Sources */,
-				9E04EDA41A1C5835006E6E2B /* ShaderProgram.cpp in Sources */,
-				9E04EDA71A1C6650006E6E2B /* GLException.cpp in Sources */,
 				9E04EEAD1A1C7FE5006E6E2B /* Body.cpp in Sources */,
 				9E04ED9E1A1C4D44006E6E2B /* Window.cpp in Sources */,
 				9EF1105F1A2064800030ED3C /* God.cpp in Sources */,

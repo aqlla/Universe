@@ -7,9 +7,11 @@
 #ifndef __Universe__Shader__
 #define __Universe__Shader__
 
-#include <iostream>
+#include <vector>
 #include <fstream>
+#include <iostream>
 #include <GLFW/glfw3.h>
+#include <OpenGL/gl3.h>
 #include "GLException.h"
 
 class Shader {
@@ -20,6 +22,25 @@ public:
     virtual ~Shader();
     
     GLuint getID();
+};
+
+
+
+class ShaderProgram {
+private:
+    GLint _programID;
+public:
+    ShaderProgram();
+    ShaderProgram(std::vector<Shader*> shaders);
+    virtual ~ShaderProgram();
+    
+    void attachShader(Shader* shader);
+    void bindFragDataLocation(GLuint colorAttachment, std::string name);
+    void link();
+    void use();
+    
+    GLint getAttributeLocation(std::string name);
+    GLint getUniformLocation(std::string name);
 };
 
 #endif /* defined(__Universe__Shader__) */

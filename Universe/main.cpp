@@ -11,7 +11,6 @@
 #include <GLFW/glfw3.h>
 #include "Window.h"
 #include "Shader.h"
-#include "ShaderProgram.h"
 #include "Body.h"
 #include "God.h"
 
@@ -27,7 +26,7 @@ int main(int argc, const char * argv[]) {
     
     // Load Shader Programs
     ShaderProgram* program;
-    Shader* vertexShader   = new Shader("ShaderProgram.vs", GL_VERTEX_SHADER);
+    Shader* vertexShader   = new Shader("asd/ShaderProgram.vs", GL_VERTEX_SHADER);
     Shader* fragmentShader = new Shader("ShaderProgram.fs", GL_FRAGMENT_SHADER);
     
     program = new ShaderProgram(std::vector<Shader*> {vertexShader, fragmentShader});
@@ -123,47 +122,6 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
-
-//void draw(Body* body, GLint vbo, GLint vao, GLint ebo) {
-//    short segCount = body->getNumSegments();
-//    
-//    float bufferData[(segCount + 1) * 2 + 2];
-//    body->getVertices(bufferData);
-//    
-//    
-//    // Add verts to buffer then unbind VBO
-//    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(bufferData), bufferData, GL_STATIC_DRAW);
-//    glBindBuffer(GL_ARRAY_BUFFER, NULL);
-//    
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-//    unsigned short indexData[segCount*3];
-//    body->getIndices(indexData);
-//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData), indexData, GL_STATIC_DRAW);
-//    
-//    glBindVertexArray(vao);
-//    
-//    glEnableVertexAttribArray(positionLoc);
-//    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//    glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
-//    glBindBuffer(GL_ARRAY_BUFFER, NULL);
-//    glBindVertexArray(NULL);
-//    
-//    // Set color
-//    glUniform4f(colorLoc, 1.0, 1.0, 1.0, 1.0);
-//    
-//    // Render objects
-//    glBindVertexArray(vao);
-//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-//    glDrawElements(GL_TRIANGLE_FAN, segCount*3, GL_UNSIGNED_SHORT, nullptr);
-//    glBindVertexArray(NULL);
-//    
-//    double dT = window->getDeltaTime();
-//    body->updateAccelerationFromGravity(bodies, dT);
-//    bodies[i]->updatePosition(dT);
-//}
-
-
 
 
 

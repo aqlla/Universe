@@ -16,9 +16,19 @@ class GLException : public std::exception
 private:
     std::string _what;
 public:
-    GLException(std::string what);
-    virtual ~GLException() throw();
-    virtual const char* what();
+    GLException(const std::string what) {
+        _what = what + std::string("\nSee error log for details.");
+    };
+    
+    virtual ~GLException() throw() {
+        std::exception::~exception();
+    };
+    
+    virtual const char* what() {
+        return _what.c_str();
+    };
 };
+
+
 
 #endif /* defined(__Universe__GLException__) */

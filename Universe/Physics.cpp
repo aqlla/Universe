@@ -23,7 +23,7 @@ double Physics::toa(double opposite, double adjacent) {
 }
 
 double Physics::sphereRadiusFromVolume(double volume) {
-    return pow(volume / ((4.0/3.0) * PI), 1.0/3.0);
+    return std::pow(volume / ((4.0/3.0) * PI), 1.0/3.0);
 }
 
 double Physics::hypoteneuse(pair_t legs) {
