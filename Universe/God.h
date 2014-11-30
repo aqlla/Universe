@@ -7,6 +7,7 @@
 #ifndef __Universe__God__
 #define __Universe__God__
 
+#include <algorithm>
 #include <iostream>
 #include <list>
 #include "Planet.h"

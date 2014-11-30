@@ -6,9 +6,9 @@
 
 #include "God.h"
 
-const int God::numBodies = 3500;
-const int God::maxR = 2000;
-const int God::minR = 200;
+const int God::numBodies = 2000;
+const int God::maxR = 1500;
+const int God::minR = 300;
 
 God::God(int windowWidth, int windowHeight)
 : windowWidth(windowWidth), windowHeight(windowHeight) {
@@ -48,6 +48,17 @@ void God::processGravity() {
         
         (*b1).get().accelerate(netForce);
     }
+    
+//    std::list<std::reference_wrapper<Body>>::iterator b;
+//    std::for_each(std::begin(bodies), std::end(bodies), [this] (std::reference_wrapper<Body> b1) {
+//        pair_t netF {0, 0};
+//        std::for_each(std::begin(bodies), std::end(bodies), [b1] (std::reference_wrapper<Body> b2) {
+//            if (b1.get() != b2.get()) {
+//                pair_t f = (*b1).get().getForce();
+//                
+//            }
+//        });
+//    });
 }
 
 void God::checkCollisions() {
