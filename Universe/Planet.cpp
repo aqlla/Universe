@@ -10,10 +10,10 @@
 
 const float Planet::MIN_DENSITY = 500;
 const float Planet::MAX_DENSITY = 1000;
-const float Planet::MIN_RADIUS = 1;
-const float Planet::MAX_RADIUS = 8;
+const float Planet::MIN_RADIUS = 2;
+const float Planet::MAX_RADIUS = 12;
 const float Planet::MIN_V = 30;
-const float Planet::MAX_V = 85;
+const float Planet::MAX_V = 105;
 
 Planet::Planet(int x, int y): Body(randi(MIN_RADIUS, MAX_RADIUS), x, y, randi(Planet::MIN_DENSITY, Planet::MAX_DENSITY))
 {
@@ -22,7 +22,7 @@ Planet::Planet(int x, int y): Body(randi(MIN_RADIUS, MAX_RADIUS), x, y, randi(Pl
         std::abs(position.x)
     };
     
-    double r = Physics::hypoteneuse(v);
+    float r = Physics::hypoteneuse(v);
     
     if (position.x > 0 && position.y > 0) {
         v.x = -v.x;

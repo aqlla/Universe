@@ -39,8 +39,8 @@ private:
     static float bodyScale;
     
 public:
-    Body(double radius, float x, float y, float density);
-    Body(double radius, float x, float y);
+    Body(float radius, float x, float y, float density);
+    Body(float radius, float x, float y);
     Body(Body& b1, Body& b2);
     virtual ~Body();
     
@@ -48,8 +48,8 @@ public:
     static const int viewHeight;
     
     pair_t dPosition;   // Display position
-    double radius;
-    double mass;
+    float radius;
+    float mass;
     
     pair_t velocity;
     pair_t position;
@@ -59,18 +59,19 @@ public:
     
     void accelerate(pair_t force);
     bool collidesWith(Body& other);
-    void setVelocity(double x, double y);
+    void setVelocity(float x, float y);
     void updatePosition(double deltaTime);
     void processGravity(std::list<std::reference_wrapper<Body>>& others);
     
     
     // Get body metrics
-    double getMass();
-    double getVolume();
+    virtual bool isStar();
+    float getMass();
+    float getVolume();
     pair_t getMomentum();
     pair_t getForce(Body& other);
     pair_t getDistanceFrom(Body& other);
-    double getDistanceFromSurface(Body& other);
+    float getDistanceFromSurface(Body& other);
     
     /* Getter functions providing information for OpenGL to display
     the bodies */

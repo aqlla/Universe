@@ -6,8 +6,8 @@
 
 #include "God.h"
 
-const int God::numBodies = 2000;
-const int God::maxR = 1500;
+const int God::numBodies = 3000;
+const int God::maxR = 2000;
 const int God::minR = 300;
 
 God::God(int windowWidth, int windowHeight)
@@ -34,31 +34,23 @@ God::~God() {
 }
 
 void God::processGravity() {
-    for (std::list<std::reference_wrapper<Body>>::iterator b1 = bodies.begin(); b1 != bodies.end(); ++b1) {
-//        (*b1).get().processGravity(ref(bodies));
-        pair_t netForce {0,0};
+    std::list<std::reference_wrapper<Body>>::iterator b;
+    std::for_each(std::begin(bodies), std::end(bodies), [this] (std::reference_wrapper<Body> b1) {
+        Body& body1 = b1.get();
+        pair_t netF {0, 0};
         
-        for (std::list<std::reference_wrapper<Body>>::iterator b2 = bodies.begin(); b2 != bodies.end(); ++b2) {
-            if (b1 != b2) {
-                pair_t force = (*b1).get().getForce(*b2);
-                netForce.x += force.x;
-                netForce.y += force.y;
+        std::for_each(std::begin(bodies), std::end(bodies), [&body1, &netF] (std::reference_wrapper<Body> b2) {
+            Body& body2 = b2.get();
+            
+            if (&body1 != &body2) {
+                pair_t f = body1.getForce(body2);
+                netF.x += f.x;
+                netF.y += f.y;
             }
-        }
+        });
         
-        (*b1).get().accelerate(netForce);
-    }
-    
-//    std::list<std::reference_wrapper<Body>>::iterator b;
-//    std::for_each(std::begin(bodies), std::end(bodies), [this] (std::reference_wrapper<Body> b1) {
-//        pair_t netF {0, 0};
-//        std::for_each(std::begin(bodies), std::end(bodies), [b1] (std::reference_wrapper<Body> b2) {
-//            if (b1.get() != b2.get()) {
-//                pair_t f = (*b1).get().getForce();
-//                
-//            }
-//        });
-//    });
+        body1.accelerate(netF);
+    });
 }
 
 void God::checkCollisions() {

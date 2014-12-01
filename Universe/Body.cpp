@@ -12,13 +12,13 @@ const int Body::viewHeight = 1400;
 float Body::viewScale = 1.0;
 float Body::bodyScale = 1.0;
 
-Body::Body(double radius, float x, float y)
+Body::Body(float radius, float x, float y)
 :radius(radius), velocity({0,0}), position({x,y}) {
     mass = Physics::volumeFromRadius(radius) * 5.0;
     setBody();
 }
 
-Body::Body(double radius, float x, float y, float density)
+Body::Body(float radius, float x, float y, float density)
 :radius(radius), velocity({0,0}), position({x,y}) {
     mass = Physics::volumeFromRadius(radius) * density;
     setBody();
@@ -60,7 +60,7 @@ void Body::setBody() {
     instanceCount++;
 }
 
-void Body::setVelocity(double x, double y) {
+void Body::setVelocity(float x, float y) {
         velocity.x = x;
         velocity.y = y;
 }
@@ -105,7 +105,7 @@ pair_t Body::getDistanceFrom(Body& other) {
     };
 }
 
-double Body::getDistanceFromSurface(Body& other) {
+float Body::getDistanceFromSurface(Body& other) {
     pair_t distComp = this->getDistanceFrom(other);
     return Physics::hypoteneuse(distComp) - this->radius - other.radius;
 }
@@ -143,38 +143,42 @@ short Body::getNumSegments() {
     return this->segments;
 }
 
-double Body::getVolume() {
+float Body::getVolume() {
     return (4.0/3.0) * PI * std::pow(radius, 3);
 }
 
-double Body::getMass() {
+float Body::getMass() {
     return this->mass;
 }
 
 pair_t Body::getForce(Body& other) {
     pair_t rV = getDistanceFrom(other);
     
-    double r = sqrt(rV.x * rV.x + rV.y * rV.y);
-    double f = (G * mass * other.mass) / (r * r);
+    float r = Physics::hypoteneuse(rV);
+    float f = (G * mass * other.mass) / (r * r);
     
-    double fx = f * (rV.x) / r;
-    double fy = f * (rV.y) / r;
+    float fx = f * (rV.x) / r;
+    float fy = f * (rV.y) / r;
     
     return pair_t {fx, fy};
 }
 
 pair_t Body::centerOfMass(Body& b1, Body& b2) {
-    double totalMass = b1.getMass() + b2.getMass();
-    double x = (b1.position.x * b1.getMass() + b2.position.x * b2.getMass()) / totalMass;
-    double y = (b1.position.y * b1.getMass() + b2.position.y * b2.getMass()) / totalMass;
+    float totalMass = b1.getMass() + b2.getMass();
+    float x = (b1.position.x * b1.getMass() + b2.position.x * b2.getMass()) / totalMass;
+    float y = (b1.position.y * b1.getMass() + b2.position.y * b2.getMass()) / totalMass;
     return pair_t {x, y};
 }
 
 pair_t Body::postCollisionVelocity(Body& b1, Body& b2) {
-    double totalMass = b1.getMass() + b2.getMass();
-    double x = (b1.getMomentum().x + b2.getMomentum().x) / totalMass;
-    double y = (b1.getMomentum().y + b2.getMomentum().y) / totalMass;
+    float totalMass = b1.getMass() + b2.getMass();
+    float x = (b1.getMomentum().x + b2.getMomentum().x) / totalMass;
+    float y = (b1.getMomentum().y + b2.getMomentum().y) / totalMass;
     return pair_t {x, y};
+}
+
+bool Body::isStar() {
+    return false;
 }
 
 void Body::setViewScale(float change) {

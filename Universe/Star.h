@@ -18,6 +18,8 @@ class Star: public Body {
     static const float MAX_RADIUS;
 public:
     Star();
+    
+    bool isStar();
 };
 
 #endif /* defined(__Universe__Star__) */

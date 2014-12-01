@@ -5,7 +5,7 @@
 //  Copyright (c) 2014 Aquilla Sherrock. All rights reserved.
 
 #include <list>
-#include <cmath>
+#include <algorithm>
 #include <iostream>
 #include <OpenGL/gl3.h>
 #include <GLFW/glfw3.h>
@@ -15,18 +15,15 @@
 #include "Body.h"
 #include "God.h"
 
-const int WIN_WIDTH  = 2200;
+const int WIN_WIDTH  = 2500;
 const int WIN_HEIGHT = 1440;
 
 void draw(Window*, ShaderProgram*);
 void scrollFunc(GLFWwindow*, double x, double y);
 
-God* god;
-Window* window;
-
 int main(int argc, const char * argv[]) {
     // Initialize window
-    window = new Window(WIN_WIDTH, WIN_HEIGHT, "OpenGL");
+    Window* window = new Window(WIN_WIDTH, WIN_HEIGHT, "OpenGL");
     window->makeContextCurrent();
     
     try {
@@ -59,21 +56,18 @@ int main(int argc, const char * argv[]) {
 
 
 void draw(Window* window, ShaderProgram* program) {
-    GLuint vbo;
+    GLuint vbo, ebo, vao;
     glGenBuffers(1, &vbo);
-    GLuint ebo;
     glGenBuffers(1, &ebo);
-    GLuint vao;
     glGenVertexArrays(1, &vao);
     
     // Get where position is located in the shader program
-    GLint positionLoc = program->getAttributeLocation("position");
     GLint colorLoc = program->getUniformLocation("color");
     
-    GLint viewWidth  = window->getFrameBufferWidth();
-    GLint viewHeight = window->getFrameBufferHeight();
+    GLint viewWidth  = window->getFrameBufferWidth(),
+          viewHeight = window->getFrameBufferHeight();
     
-    god = new God(viewWidth, viewHeight);
+    God* god = new God(viewWidth, viewHeight);
     std::list<std::reference_wrapper<Body>> bodies = god->bodies;
     
     while (!window->shouldClose()) {
@@ -82,11 +76,16 @@ void draw(Window* window, ShaderProgram* program) {
         glViewport(0, 0, viewWidth, viewHeight);
         glClear(GL_COLOR_BUFFER_BIT);
         
-        for (std::list<std::reference_wrapper<Body>>::iterator it = bodies.begin(); it != bodies.end(); ++it) {
-            short segCount = (*it).get().getNumSegments();
+        // Set color
+        glUniform4f(colorLoc, 1.0, 1.0, 1.0, 1.0);
+        
+        std::list<std::reference_wrapper<Body>>::iterator b;
+        std::for_each(std::begin(bodies), std::end(bodies), [&window, &vbo, &ebo, &vao] (std::reference_wrapper<Body> b) {
+            Body* body = &b.get();
+            short segCount = body->getNumSegments();
             
             float bufferData[(segCount + 1) * 2 + 2];
-            (*it).get().getVertices(bufferData);
+            body->getVertices(bufferData);
             
             // Add verts to buffer then unbind VBO
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -95,19 +94,15 @@ void draw(Window* window, ShaderProgram* program) {
             
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
             unsigned short indexData[segCount*3];
-            (*it).get().getIndices(indexData);
+            body->getIndices(indexData);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData), indexData, GL_STATIC_DRAW);
             
             glBindVertexArray(vao);
-            
-            glEnableVertexAttribArray(positionLoc);
+            glEnableVertexAttribArray(0);
             glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            glVertexAttribPointer(positionLoc, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
+            glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
             glBindBuffer(GL_ARRAY_BUFFER, NULL);
             glBindVertexArray(NULL);
-            
-            // Set color
-            glUniform4f(colorLoc, 1.0, 1.0, 1.0, 1.0);
             
             // Render objects
             glBindVertexArray(vao);
@@ -115,8 +110,8 @@ void draw(Window* window, ShaderProgram* program) {
             glDrawElements(GL_TRIANGLE_FAN, segCount*3, GL_UNSIGNED_SHORT, nullptr);
             glBindVertexArray(NULL);
             
-            (*it).get().updatePosition(window->getDeltaTime());
-        }
+            body->updatePosition(window->getDeltaTime());
+        });
         
         god->processGravity();
         god->checkCollisions();

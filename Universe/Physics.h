@@ -17,13 +17,13 @@ class Physics {
 public:
     static const double deg2rad;
     
-    static double soh(double opposite, double hypoteneuse);
-    static double cah(double adjacent, double hypoteneuse);
-    static double toa(double opposite, double adjacent);
-    static double hypoteneuse(pair_t legs);
+    static float soh(float opposite, float hypoteneuse);
+    static float cah(float adjacent, float hypoteneuse);
+    static float toa(float opposite, float adjacent);
+    static float hypoteneuse(pair_t legs);
     
-    static double volumeFromRadius(double radius);
-    static double sphereRadiusFromVolume(double volume);
+    static float volumeFromRadius(float radius);
+    static float sphereRadiusFromVolume(float volume);
 };
 
 

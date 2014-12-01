@@ -8,27 +8,27 @@
 
 const double Physics::deg2rad = PI / 180;
 
-double Physics::soh(double opposite, double hypoteneuse) {
+float Physics::soh(float opposite, float hypoteneuse) {
     return opposite / hypoteneuse;
 }
 
-double Physics::cah(double adjacent, double hypoteneuse) {
+float Physics::cah(float adjacent, float hypoteneuse) {
     return adjacent / hypoteneuse;
 }
 
-double Physics::toa(double opposite, double adjacent) {
+float Physics::toa(float opposite, float adjacent) {
     return opposite / adjacent;
 }
 
-double Physics::volumeFromRadius(double radius) {
+float Physics::volumeFromRadius(float radius) {
     return (4.0/3.0) * PI * std::pow(radius, 3);
 }
 
-double Physics::sphereRadiusFromVolume(double volume) {
+float Physics::sphereRadiusFromVolume(float volume) {
     return std::pow(volume / ((4.0/3.0) * PI), 1.0/3.0);
 }
 
-double Physics::hypoteneuse(pair_t legs) {
+float Physics::hypoteneuse(pair_t legs) {
     return std::sqrt(legs.x * legs.x + legs.y * legs.y);
 }
 
